@@ -1,0 +1,16 @@
+# drink water reminder
+import time
+import win32com.client
+speaker = win32com.client.Dispatch("SAPI.SpVoice")
+
+
+def remind_to_drink_water():
+     while True:
+        current_time = time.strftime("%H:%M:%S")
+        if current_time == "10:55:00":
+           speaker.Speak("It's time to drink water!")
+           print("Reminder: Drink water!")
+           time.sleep(60) # Check every second
+        time.sleep(1) # Check every second
+
+remind_to_drink_water()

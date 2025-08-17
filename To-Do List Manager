@@ -1,0 +1,54 @@
+import time 
+#Add tasks
+def add():
+  lst = []
+  while True:
+    print("\nWelcome to our task manager app\n1. Add Task\n2. View Tasks\n3. Delete Task\n4. Mark Task as Done\n5. Exit\n")
+    t1 = time.time()
+    user = input("Select one: ")
+    if user == "1":
+        addd = input("Add your task: ")
+        lst.append({"task": addd, "done": False})
+        t2 = time.time()
+        print(f"\nTask added successfully in {t1 - t2:1f}\n")
+
+    elif user =="2":
+        if not lst:
+           print("No file founded")
+
+        else:
+          for i, t in enumerate( lst,1):
+             st = "done" if t["done"] else "not done"
+             print(f"{i}. {t['task']} - {st}")
+
+
+    elif user == "3":
+       if not lst:
+          print("No data in lst")
+
+       else:
+          num = int(input("Enter your deleted task number: "))
+          if 1 <= num <= len(lst):
+             de = lst.pop(num-1)
+             print(f"\ntask deleted sucsecsfully {de['task']}")
+
+    elif user == "4":
+       if not lst:
+          print("Invalid task number")
+
+       else:
+          num = int(input("Enter your task number mark as done: "))
+          if 1 <= num <= len(lst):
+             lst[num-1]['done'] = True
+             print(f"\nTask marked done: {lst[num-1]['task']}\n")
+
+
+    elif user == "5":
+            print("\n👋 Exiting Task Manager...")
+            break
+
+    else:
+         print("⚠ Invalid option, try again!")
+add()
+
+    

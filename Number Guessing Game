@@ -1,0 +1,27 @@
+import random
+def main():
+  print("Welcome to our number gussing game!\n")
+  t = 0
+  while True:
+    robot = random.randint(1, 101)
+    user =int(input("Select a random number: "))
+    t += 1
+    if robot == (user):
+        print("Correct")
+        print(f"Robot select: {robot}\n")
+    elif robot < (user):
+         print("Too high")
+         print(f"Robot select: {robot}\n")
+    else:
+        print("Too low")
+        print(f"Robot select: {robot}\n")
+    e = int(input("Are you interest to play this game or quiet or check your trying times\n1. Play again\n2.Check trying times\n3.Quit?\n: "))
+    if e == 3:
+      break
+    elif e == 2:
+       
+        print(f"Your trying times is {t}")
+
+  
+
+main()

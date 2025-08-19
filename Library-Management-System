@@ -1,0 +1,71 @@
+# Introduce
+print("welcome to our Library\n")
+# Function 
+def book():
+     all_books = []
+     lent = {}
+     while True: 
+         user = input("Our options\n1. Add books\n2. Share\n3. Check avelivale\n4. Save your book\n5. View book\n6. exit\nChoose one:")
+         if user == "1": 
+            title = input("Enter your book title: ") 
+            author = input("Enter your book author title: ") 
+            year = input("Enter book release year: ") 
+            all_books.append({"Title": title, "Author": author, "Year": year}) 
+            print(("Book sucseccsfully saved!"))
+
+         # Lend book 
+         elif user == "2": 
+            if not all_books: 
+              print("\nNo books available to lend.") 
+            else: 
+              print("\nAvailable Books:")
+              for i, book in enumerate(all_books, 1):
+                 print(f"\n{i}. {book['Title']} - {book['Author']} - {book['Year']}")
+
+            try:
+                 n = int(input("\nEnter the book number you want to lend: "))
+                 if 1 <= n <= len(all_books):
+                     book_to_lend = all_books.pop(n-1)
+                     friend = input("\nEnter your friend's name: ")
+                     lent[friend] = book_to_lend
+                     print(f"\n{book_to_lend['Title']} lent to {friend} successfully!\n")
+                 else:
+                     print("Invalid book number.\n")
+            except ValueError:
+                 print("Please enter a valid number.")
+
+         # Search books
+         elif user == "3": 
+             check = input("\nEnter the book title to check: ")
+             found = False
+             for book in all_books:
+                 if book["Title"].lower() == check.lower():
+                     print("\nThis book is available.\n")
+                     found = True
+                     break
+             if not found:
+                 print("This book is not available.\n")
+         # Save books
+         elif user == "4":
+                with open("saved_books.txt", "w", encoding="utf-8") as f:
+                     for i, book in enumerate(all_books, 1):
+                         f.write(f"{i}. {book['Title']} - {book['Author']} - {book['Year']}\n")
+                         print("Books saved successfully to 'saved_books.txt'.\n")
+         # View books
+         elif user == "5": 
+                if not all_books:
+                    print("\nThank you for using this library....\n") 
+                    break 
+
+                else: 
+                    print("\nAll books:")
+                    for i,j in enumerate(all_books, 1): 
+                     print(f"{i}. {j['Title']} - {j['Author']} - {j['Year']}") 
+         # Exit
+         elif user == "6":
+             print("\nThank you for using this library....")
+             break
+
+         else:
+             print("Invalid option. Please try again.")
+book()

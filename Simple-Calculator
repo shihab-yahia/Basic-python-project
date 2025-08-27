@@ -1,0 +1,76 @@
+def show_history():
+    with open('history.txt', 'r') as f:
+        lis = f.readlines()
+        if len(lis) == 0:
+            print("No file founded")
+
+        else:
+            for line in reversed(lis):
+                print(line)
+
+
+def clear_file():
+        open('history.txt', 'w').close()
+
+        print("File cleared")
+
+def save_to_history(equation, result):
+    with open('history.txt', 'a') as f:
+        f.write(str(equation) + "=" + str(result) + "\n")
+
+
+def calculate(user):
+    part = user.split()
+    if len(part) != 3:
+        print("Invalid input please use this format num operator num (e.g 2 + 2)")
+        return
+
+    num1 = float(part[0])
+    operator = part[1]
+    num2 = float(part[2])
+
+    if operator == "+":
+        result = num1 + num2
+
+    elif operator == "-":
+        result = num1 - num2
+
+    elif operator == "*":
+        result = num1 * num2
+    elif operator == "/":
+        if num2 == 0:
+            print("Cannot divide by zero")
+            return
+        result = num1 / num2
+
+
+    else:
+        print("Invalid operator")
+        return
+    if int(result) == result:
+        result = int(result)
+    print("Result: ", result)
+    save_to_history(user, result)
+
+
+def main():
+    print("---Welcome to our simple calculator---\n")
+    while True:
+        user = input("Enter calculation (+ - * /) or command (history, clear, save, exit, help): ")
+        if user == "":
+            raise TypeError("Please enter a valid input")
+        if user == "exit":
+            break
+
+        elif user == "history":
+            show_history()
+
+        elif user == "clear":
+            clear_file()
+        elif user == "help":
+            print("You can calculate two numbers separated by space (e.g 2 + 2) ")
+            break
+        else:
+            calculate(user)
+
+main()

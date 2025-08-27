@@ -1,3 +1,5 @@
+
+import math
 def show_history():
     with open('history.txt', 'r') as f:
         lis = f.readlines()
@@ -52,25 +54,53 @@ def calculate(user):
     print("Result: ", result)
     save_to_history(user, result)
 
+def advanced_calculation(user):
+    part = user.split()
+
+    if len(part) == 2 and part[1] == "^":
+        num = float(part[0])
+        result = num**2
+        print(f"{part[0]} * {part[1]} = {str(result)}")
+        return
+
+    if len(part) == 2 and part[1] == "√":
+        num1 = float(part[0])
+        if num1 < 0:
+            print("Cannot divide by zero")
+            return
+        result1 = math.sqrt(num1)
+        print(f"{part[0]} * {part[1]} = {str(result1)}")
+        return
+
 
 def main():
     print("---Welcome to our simple calculator---\n")
     while True:
-        user = input("Enter calculation (+ - * /) or command (history, clear, save, exit, help): ")
+        print("\nOptions:")
+        print("1. Show history")
+        print("2. Clear history")
+        print("3. Simple calculator")
+        print("4. Advanced calculator")
+        print("5. Exit")
+
+        user = input("Enter your choice: ")
         if user == "":
             raise TypeError("Please enter a valid input")
-        if user == "exit":
-            break
-
-        elif user == "history":
+        if user == "1":
             show_history()
 
-        elif user == "clear":
+        elif user == "2":
             clear_file()
-        elif user == "help":
-            print("You can calculate two numbers separated by space (e.g 2 + 2) ")
-            break
+
+        elif user == "3":
+             exp = input("Enter an expression: ")
+             calculate(exp)
+        elif user == "4":
+            expr = input("Enter advanced calculation (e.g 5 ^ or 9 √): ")
+            advanced_calculation(expr)
         else:
-            calculate(user)
+            print("Thanks for using our simple calculator")
+            break
+
 
 main()

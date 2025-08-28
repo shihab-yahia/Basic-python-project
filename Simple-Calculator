@@ -1,5 +1,5 @@
-
 import math
+import turtle
 def show_history():
     with open('history.txt', 'r') as f:
         lis = f.readlines()
@@ -57,10 +57,11 @@ def calculate(user):
 def advanced_calculation(user):
     part = user.split()
 
-    if len(part) == 2 and part[1] == "^":
+    if len(part) == 3 and part[1] == "^":
         num = float(part[0])
-        result = num**2
-        print(f"{part[0]} * {part[1]} = {str(result)}")
+        num1 = float(part[2])
+        result = num**num1
+        print(f"{part[0]} ^ {part[2]} = {int(result)}")
         return
 
     if len(part) == 2 and part[1] == "√":
@@ -69,8 +70,12 @@ def advanced_calculation(user):
             print("Cannot divide by zero")
             return
         result1 = math.sqrt(num1)
-        print(f"{part[0]} * {part[1]} = {str(result1)}")
+        print(f"Result: {int(result1)}")
         return
+
+
+
+
 
 
 def main():
